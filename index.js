@@ -16,9 +16,9 @@ module.exports = function objectPatch(object, patch) {
     }
 
     // If increment operator, increment (+=) value of 
-    // object's key prop with value.
+    // object's key prop with increment.
     if (increment) {
-      return object[key] += value;
+      return object[key] += increment;
     }
 
     // If value is an object, objectPatch object's key prop 
