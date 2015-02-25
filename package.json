@@ -1,6 +1,6 @@
 {
   "name": "object-patch",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Deep object extend / merge with a mongo-like $inc operator.",
   "main": "index.js",
   "scripts": {
