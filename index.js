@@ -1,8 +1,8 @@
 var _ = require('underscore');
 
-module.exports = function patch(object, patch) { 
+module.exports = function objectPatch(object, patch) { 
   _.each(patch, function(value, key) {
-    var increment = (_.isObject(value) ? value || {})['$inc'];
+    var increment = (_.isObject(value) ? value : {})['$inc'];
 
     // Unset key on object if value is null or undefined
     if (_.isNull(value) || _.isUndefined(value)) {
@@ -21,10 +21,10 @@ module.exports = function patch(object, patch) {
       return object[key] += value;
     }
 
-    // If value is an object, extend object's key prop 
+    // If value is an object, objectPatch object's key prop 
     // with value.
     if (_.isObject(value)) {
-      return extend(object[key], value);
+      return objectPatch(object[key], value);
     }
 
     // Value is not null, undefined, an array, an increment 
