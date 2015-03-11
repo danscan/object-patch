@@ -4,6 +4,8 @@ Deep object extend / merge with a mongo-like $inc operator.
 ## Usage
 
 ```javascript
+var patch = require('object-patch');
+
 var document = {
   name: 'Dan Scanlon',
   grade: 6,
@@ -16,7 +18,7 @@ var document = {
   }
 };
 
-var patch = {
+var documentPatch = {
   school: 'SAHS',
   grade: 7,
   rewardPoints: {
@@ -25,7 +27,7 @@ var patch = {
   }
 };
 
-extend(document, patch);
+patch(document, documentPatch);
 > {
   name: 'Dan Scanlon',
   grade: 7,
