@@ -1,6 +1,6 @@
 var _ = require('underscore');
 
-module.exports = function objectPatch(object, patch) { 
+module.exports = function objectPatch(object, patch) {
   _.each(patch, function(value, key) {
     var increment = (_.isObject(value) ? value : {})['$inc'];
 
@@ -9,30 +9,29 @@ module.exports = function objectPatch(object, patch) {
       return delete object[key];
     }
 
-    // Overwrite value of key prop on object with value 
+    // Overwrite value of key prop on object with value
     // if value is array.
     if (_.isArray(value)) {
       return object[key] = value;
     }
 
-    // If increment operator, increment (+=) value of 
+    // If increment operator, increment (+) value of
     // object's key prop with increment.
     if (increment) {
-      return Number(object[key]) += Number(increment);
+      return object[key] = Number(object[key]) + Number(increment);
     }
 
-    // If value is an object, objectPatch object's key prop 
+    // If value is an object, objectPatch object's key prop
     // with value.
     if (_.isObject(value)) {
       return objectPatch(object[key], value);
     }
 
-    // Value is not null, undefined, an array, an increment 
-    // operator value, or an object.  Overwrite key prop on 
+    // Value is not null, undefined, an array, an increment
+    // operator value, or an object.  Overwrite key prop on
     // object with value.
     object[key] = value;
   });
 
   return object;
 };
-
